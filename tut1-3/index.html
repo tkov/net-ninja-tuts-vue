@@ -1,0 +1,99 @@
+<!-- Lessons 1 through 3 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue</title>
+    <script src="https://unpkg.com/vue@3.0.2"></script>
+    <style>
+        body {
+            background : #eee;
+            max-width: 960 px;
+            margin: 20px auto;
+        }
+
+        p, h3, ul{
+            margin: 0;
+            padding: 0;
+        }
+
+
+
+        .box {
+            padding: 100px 0;
+            width: 300px;
+            text-align:center;
+            background: #ddd;
+            margin: 20px;
+            display: inline-block;
+            border-radius: 8px 8px 0 0;
+        }
+
+        li {
+            list-style-type: none;
+            background: #fff;
+            margin: 20px auto;
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        li.fav {
+           background: #ff9ed2;
+           color: white; 
+        }
+
+
+    </style>
+</head>
+<body>
+    <h1>Hello, Vue :)</h1>
+    
+    <div id="app">
+        <!-- attribute binding -->
+        <a v-bind:href="url">Best Website ;)</a>
+
+        <div v-if="showBooks">
+            <p>{{ title }} - {{ author }} - {{ age }}</p>
+            <!-- v-for -->
+            <div>
+                <ul>
+                    <!-- v-for="book in filteredBook" ... -->
+                    <li v-for="book in books"  v-bind:class="{ fav: book.isFav }" @click="toggleFav(book)">
+                        <img :src="book.img" :alt="book.title"/>
+                         {{ book.title }} by: {{ book.author }} 
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        
+    
+        <!-- you can also use v-show, which manipulates css (display:none;) instead of removing the element from the DOM completely (which v-if does) -->
+        
+
+        <!-- Click events -->
+        <!--
+        <button v-on:click="age++" >Increase Age</button>
+        <button v-on:click="age--" >Decrease Age</button> 
+        <div @click="changeTitle">Change Book Title</div> -->
+
+        <button @click="toggleShowBooks">
+            <span>Toggle Books</span>
+        </button>
+
+        <!-- Tut 03: mouse events -->
+        <div class="box" @mouseover="handleEvent($event, 5)">mouseover (enter)</div>
+        <div class="box" @mouseleave="handleEvent">mouseleave</div>
+        <div class="box" @dblclick="handleEvent">double click</div>
+        <div class="box" @mousemove="handleMouseMove"> position - {{ this.x }} - {{ this.y }} </div>
+    
+    
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
